@@ -14,11 +14,19 @@ type TechnologyCardProps = {
 
 const Home: NextPage = () => {
   // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-  const { data, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   if (status === 'loading') {
-    return <p>Loading...</p>;
+    return (
+      <div className="container mx-auto flex flex-col items-center justify-between min-h-screen px-4">
+        <main className="text-center">
+          <h1 className="text-2xl md:text-5xl lg:text-5xl 2xl:text-6xl leading-tight font-bold">
+            loading...
+          </h1>
+        </main>
+      </div>
+    );
   }
 
   if (status === 'authenticated') {
