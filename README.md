@@ -129,3 +129,13 @@ You can also dockerize this stack and deploy a container.
 Here are some resources that we commonly refer to:
 
 - [Protecting routes with Next-Auth.js](https://next-auth.js.org/configuration/nextjs#unstable_getserversession)
+
+## TODO
+
+[] refresh user info when register username (profile page)
+[] change layout for user info and 3 things forms
+[] user info form
+[] 3 things form
+[] public profile page '/u/username'
+[] login with facebook
+[] change avatar picture
