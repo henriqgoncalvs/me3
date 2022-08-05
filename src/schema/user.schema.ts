@@ -1,7 +1,8 @@
 import z from 'zod';
 
-export const createUsernameInputSchema = z.object({
-  username: z.string(),
+export const editUserInputSchema = z.object({
+  bio: z.string().optional(),
+  name: z.string().optional(),
 });
 
-export type CreateUsernameInput = z.TypeOf<typeof createUsernameInputSchema>;
+export type EditUserInputSchema = z.TypeOf<typeof editUserInputSchema>;

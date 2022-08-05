@@ -3,11 +3,14 @@ import { signOut, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Footer from '../components/Footer';
-import Loading from '../components/Loading';
+import { Footer } from '../components/footer';
+import { Loading } from '../components/loading';
 import { trpc } from '../utils/trpc';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { CreateUsernameInput } from '../schema/user.schema';
+import { CreateUsernameInput } from '../schema/username.schema';
+import { EditUserInputSchema } from '../schema/user.schema';
+import { Input } from '../components/input';
+import { toast } from 'react-toastify';
 
 const UsernameForm = () => {
   const { mutate } = trpc.useMutation('user.username');
@@ -40,7 +43,6 @@ const UsernameForm = () => {
       <h3 className="max-w-sm">Welcome to me3, let{`'`}s start choosing an username 🥳</h3>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* register your input into the hook by invoking the "register" function */}
         <input placeholder="username" {...register('username', { required: true })} />
 
         <input type="submit" />
@@ -49,6 +51,46 @@ const UsernameForm = () => {
         {errors.username && <span>Username is required</span>}
       </form>
     </>
+  );
+};
+
+const UserForm = ({ name, bio }: { name?: string; bio?: string }) => {
+  const { mutate } = trpc.useMutation('user.edit-user');
+  const { register } = useForm<EditUserInputSchema>();
+  const errorNotify = (field: string) =>
+    toast.error(`Oops! There was an error on the ${field} field 😭`);
+
+  return (
+    <form onSubmit={(e: any) => e.preventDefault()}>
+      <Input<EditUserInputSchema>
+        register={register}
+        name="name"
+        defaultValue={name || ''}
+        label="name"
+        onBlurCallback={({ value, errorHandler }) =>
+          mutate(
+            { name: value },
+            {
+              onError: (e) => {
+                errorNotify('name');
+                if (errorHandler) errorHandler();
+              },
+            },
+          )
+        }
+        placeholder="name"
+      />
+
+      <Input<EditUserInputSchema>
+        register={register}
+        name="bio"
+        type="textarea"
+        defaultValue={bio || ''}
+        label="bio"
+        onBlurCallback={({ value }) => mutate({ bio: value })}
+        placeholder="bio"
+      />
+    </form>
   );
 };
 
@@ -87,13 +129,11 @@ const ProfilePage: NextPage = () => {
           </div>
         </div>
 
-        <main className="text-center">
+        <main className="text-center w-full md:w-96 p-4 flex-1">
           {userData?.user?.username ? (
-            <h1 className="text-2xl md:text-5xl lg:text-5xl 2xl:text-6xl leading-snug font-bold">
-              sign up, <br />
-              fill your info, <br />
-              share your profile.
-            </h1>
+            <div className="w-full">
+              <UserForm bio={userData.user.bio} name={userData.user.name || undefined} />
+            </div>
           ) : (
             <UsernameForm />
           )}

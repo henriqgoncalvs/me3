@@ -4,8 +4,8 @@ import { signIn, useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Footer from '../components/Footer';
-import Loading from '../components/Loading';
+import { Footer } from '../components/footer';
+import { Loading } from '../components/loading';
 // import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {

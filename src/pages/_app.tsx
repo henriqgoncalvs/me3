@@ -7,11 +7,21 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import '../styles/globals.css';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
       <Component {...pageProps} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        closeOnClick
+        pauseOnHover
+        theme="dark"
+      />
     </SessionProvider>
   );
 };
