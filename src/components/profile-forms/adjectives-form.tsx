@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import { adjectivesList } from '../../lib/adjectives-list';
 import { UserAdjective } from '../../schema/user-adjective.schema';
 import { trpc } from '../../utils/trpc';
+import { InputSkeleton } from '../input-skeleton';
 
 const AdjectiveInput = ({
   label,
@@ -80,8 +81,11 @@ export const AdjectivesForm = () => {
       <h3 className="mb-3">your 3 adjectives 👁️‍🗨️</h3>
       <div className="p-4 bg-slate-700 rounded-xl w-full">
         {isLoading ? (
-          // TODO style skeleton
-          <Skeleton count={3} />
+          <>
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </>
         ) : (
           <>
             <AdjectiveInput label="first adjective" userAdjective={data?.[0]} />

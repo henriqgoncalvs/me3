@@ -1,9 +1,9 @@
-import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 import { toast } from 'react-toastify';
 import { UserSkill } from '../../schema/user-skill.schema';
 import { trpc } from '../../utils/trpc';
 import { Input } from '../input';
+import { InputSkeleton } from '../input-skeleton';
 
 const SkillInput = ({
   name,
@@ -48,8 +48,11 @@ export const SkillsForm = () => {
       <h3 className="mb-3">your 3 skills 🤹‍♀️</h3>
       <div className="p-4 bg-slate-700 rounded-xl w-full">
         {isLoading ? (
-          // TODO style skeleton
-          <Skeleton count={3} />
+          <>
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </>
         ) : (
           <form onSubmit={(e: any) => e.preventDefault()}>
             <SkillInput name="skill1" label="first skill" userSkill={data?.[0]} />

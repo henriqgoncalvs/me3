@@ -11,18 +11,26 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <ToastContainer
-        position="bottom-center"
-        autoClose={3000}
-        closeOnClick
-        pauseOnHover
-        theme="dark"
-      />
+      <SkeletonTheme
+        baseColor="#475569"
+        highlightColor="#687991"
+        height="40px"
+        borderRadius="0.75rem"
+      >
+        <Component {...pageProps} />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          closeOnClick
+          pauseOnHover
+          theme="dark"
+        />
+      </SkeletonTheme>
     </SessionProvider>
   );
 };

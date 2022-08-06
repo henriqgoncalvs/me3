@@ -7,6 +7,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import Skeleton from 'react-loading-skeleton';
 import { UserSong } from '../../schema/user-song.schema';
+import { InputSkeleton } from '../input-skeleton';
 
 const SongInput = ({ label, userSong }: { label: string; userSong?: UserSong }) => {
   const [selectedTrack, setSelectedTrack] = useState<UserSong | undefined>(userSong);
@@ -103,8 +104,11 @@ export const SongsForm = () => {
       <h3 className="mb-3">your 3 songs 🎧</h3>
       <div className="p-4 bg-slate-700 rounded-xl w-full">
         {isLoading ? (
-          // TODO style skeleton
-          <Skeleton count={3} />
+          <>
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </>
         ) : (
           <>
             <SongInput label="first song" userSong={data?.[0]} />

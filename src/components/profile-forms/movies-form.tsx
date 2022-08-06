@@ -8,6 +8,7 @@ import { useDebounce } from '../../hooks/useDebounce';
 import { TMDB_IMAGE_BASE_URL } from '../../lib/tmdb';
 import { UserMovie } from '../../schema/user-movie.schema';
 import { trpc } from '../../utils/trpc';
+import { InputSkeleton } from '../input-skeleton';
 
 const MovieInput = ({ label, userMovie }: { label: string; userMovie?: UserMovie }) => {
   const [selectedMovie, setSelectedMovie] = useState<UserMovie | undefined>(userMovie);
@@ -106,8 +107,11 @@ export const MoviesForm = () => {
       <h3 className="mb-3">your 3 movies 📽️</h3>
       <div className="p-4 bg-slate-700 rounded-xl w-full">
         {isLoading ? (
-          // TODO style skeleton
-          <Skeleton count={3} />
+          <>
+            <InputSkeleton />
+            <InputSkeleton />
+            <InputSkeleton />
+          </>
         ) : (
           <>
             <MovieInput label="first movie" userMovie={data?.[0]} />
