@@ -1,24 +1,11 @@
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import { signIn, useSession } from 'next-auth/react';
 
 import Head from 'next/head';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Footer } from '../components/footer';
-import { Loading } from '../components/loading';
-// import { trpc } from "../utils/trpc";
+import { getServerAuthSession } from '../server/common/get-server-auth-session';
 
 const Home: NextPage = () => {
-  // const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
-  const { status } = useSession();
-  const router = useRouter();
-
-  if (status === 'loading') return <Loading />;
-
-  if (status === 'authenticated') {
-    router.push('/profile');
-  }
-
   return (
     <>
       {/* TODO add SEO */}
@@ -56,3 +43,22 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const session = await getServerAuthSession(ctx);
+
+  if (session?.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/profile',
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { HTMLInputTypeAttribute, useRef, useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import { MdModeEdit } from 'react-icons/md';
 import { useEnterKeyPress } from '../hooks/useEnterKeyPress';
@@ -11,6 +11,7 @@ type InputP<T> = {
   register: UseFormRegister<T>;
   type?: 'input' | 'textarea';
   label: string;
+  maxLength?: number;
 };
 
 type Event = {
@@ -25,6 +26,7 @@ export const Input = <T extends FieldValues>({
   onBlurCallback,
   register,
   label,
+  maxLength,
 }: InputP<T>) => {
   const { onBlur, name: registerName, ref } = register(name);
   const [currentValue, setCurrentValue] = useState<string | undefined>(undefined);
@@ -66,6 +68,7 @@ export const Input = <T extends FieldValues>({
       ref(event);
       inputRef.current = event;
     },
+    ...(maxLength && { maxLength }),
   };
 
   if (type === 'textarea') {
@@ -73,7 +76,7 @@ export const Input = <T extends FieldValues>({
       <>
         <label htmlFor={registerName}>{label}</label>
         <div className="relative">
-          <textarea {...defaultProps} />
+          <textarea {...defaultProps} rows={4} />
           {!isOnFocus && (
             <div className="absolute right-5 top-1 translate-y-1/2 z-20">
               <MdModeEdit size={18} />

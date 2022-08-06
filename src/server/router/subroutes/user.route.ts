@@ -1,4 +1,4 @@
-import { createUsernameInputSchema } from '../../../schema/username.schema';
+import { usernameInputSchema } from '../../../schema/username.schema';
 import * as trpc from '@trpc/server';
 import { createProtectedRouter } from '../protected-router';
 import { editUserInputSchema } from '../../../schema/user.schema';
@@ -6,7 +6,7 @@ import { editUserInputSchema } from '../../../schema/user.schema';
 // Example router with queries that can only be hit if the user requesting is signed in
 export const userRouter = createProtectedRouter()
   .mutation('username', {
-    input: createUsernameInputSchema,
+    input: usernameInputSchema,
     async resolve({ ctx, input }) {
       const foundUser = await ctx.prisma.user.findUnique({
         where: {
