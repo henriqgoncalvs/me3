@@ -9,10 +9,6 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-model Example {
-  id String @id @default(cuid())
-}
-
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -40,14 +36,16 @@ model Session {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  username String?   @unique
-  email    String?   @unique
-  name     String?
-  image    String?
-  bio      String?
-  accounts Account[]
-  sessions Session[]
+  id            String     @id @default(cuid())
+  username      String?    @unique
+  email         String?    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  bio           String?
+  accounts      Account[]
+  sessions      Session[]
+  UserSong      UserSong[]
 }
 
 model VerificationToken {
@@ -56,4 +54,17 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model UserSong {
+  id             String  @id @default(cuid())
+  songTitle      String
+  artist         String
+  albumBannerUrl String?
+  previewUrl     String?
+  spotifyId      String  @unique
+
+  userId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
