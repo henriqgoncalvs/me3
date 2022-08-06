@@ -10,6 +10,8 @@ import { getServerAuthSession } from '../server/common/get-server-auth-session';
 import { useState } from 'react';
 import { UserForm } from '../components/profile-forms/user-form';
 import { SongsForm } from '../components/profile-forms/songs-form';
+import { MoviesForm } from '../components/profile-forms/movies-form';
+import { AdjectivesForm } from '../components/profile-forms/adjectives-form';
 
 const UsernameForm = ({ setUsername }: { setUsername: (username: string) => void }) => {
   const { mutate } = trpc.useMutation('user.username');
@@ -89,7 +91,9 @@ const ProfilePage: NextPage = () => {
                 username={userData?.user?.username}
                 setUsername={setUsername}
               />
+              <AdjectivesForm />
               <SongsForm />
+              <MoviesForm />
             </div>
           ) : (
             <UsernameForm setUsername={setUsername} />

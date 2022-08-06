@@ -1,7 +1,6 @@
-import { Fragment, LegacyRef, useEffect, useState } from 'react';
+import { LegacyRef, useEffect, useState } from 'react';
 import { Combobox } from '@headlessui/react';
 import { trpc } from '../../utils/trpc';
-import { SongFromSpotify } from '../../lib/spotify';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import Skeleton from 'react-loading-skeleton';
@@ -88,8 +87,6 @@ const SongInput = ({ label, userSong }: { label: string; userSong?: UserSong }) 
 
 export const SongsForm = () => {
   const { data, isLoading } = trpc.useQuery(['user-songs.get-songs']);
-
-  console.log(data);
 
   return (
     <div className="flex flex-col items-start mt-5">

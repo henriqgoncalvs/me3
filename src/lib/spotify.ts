@@ -7,7 +7,7 @@ const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const SEARCH_BASE_ENDPOINT = `https://api.spotify.com/v1/search?q=`;
+const SPOTIFY_BASE_ENDPOINT = `https://api.spotify.com/v1`;
 
 export const getAccessToken = async () => {
   const response = await fetch(TOKEN_ENDPOINT, {
@@ -28,12 +28,19 @@ export const getAccessToken = async () => {
 export const getTrackSearch = async ({ q }: { q: string }) => {
   const { access_token } = await getAccessToken();
 
-  return fetch(`${SEARCH_BASE_ENDPOINT}${encodeURIComponent(q)}&type=track&limit=5`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${access_token}`,
+  const response = await fetch(
+    `${SPOTIFY_BASE_ENDPOINT}/search?q=${encodeURIComponent(q)}&type=track&limit=5`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
     },
-  });
+  );
+
+  const data = await response.json();
+
+  return data;
 };
 
 export type SongFromSpotify = {

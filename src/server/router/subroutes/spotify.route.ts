@@ -10,9 +10,7 @@ export const spotifyRouter = createProtectedRouter().query('search', {
     const { q } = input;
 
     try {
-      const response: any = await getTrackSearch({ q });
-
-      const tracksResponse: SpotifyApiResponse = await response.json();
+      const tracksResponse: SpotifyApiResponse = await getTrackSearch({ q });
 
       const tracks = tracksResponse.tracks?.items.map((track) => ({
         spotifyId: track.id,
