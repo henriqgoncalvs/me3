@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { LegacyRef, useEffect, useState } from 'react';
 import { Combobox } from '@headlessui/react';
 import { trpc } from '../../utils/trpc';
@@ -46,10 +48,14 @@ const SongInput = ({ label, userSong }: { label: string; userSong?: UserSong }) 
         <div className="flex items-center w-full">
           {selectedTrack?.albumBannerUrl ? (
             <div className="flex items-center justify-center w-12 h-10 mr-2 pt-1">
-              <img src={selectedTrack.albumBannerUrl} className="rounded-md" />
+              <img
+                src={selectedTrack.albumBannerUrl}
+                className="rounded-md"
+                alt={`${selectedTrack?.songTitle} album cover`}
+              />
             </div>
           ) : (
-            <div className="w-12 h-10 rounded-md mr-3 bg-slate-500 border-dotted border-2 border-dashed border-slate-200" />
+            <div className="w-12 h-10 rounded-md mr-3 bg-slate-500 border-2 border-dashed border-slate-200" />
           )}
           <Combobox.Input
             onChange={(event) => setQuery(event.target.value)}
@@ -69,7 +75,11 @@ const SongInput = ({ label, userSong }: { label: string; userSong?: UserSong }) 
                   className="p-1 bg-slate-500 flex m-1 rounded-xl cursor-pointer hover:bg-slate-400 items-center"
                 >
                   {track.albumBannerUrl && (
-                    <img src={track.albumBannerUrl} className="w-auto h-10 rounded-md" />
+                    <img
+                      src={track.albumBannerUrl}
+                      className="w-auto h-10 rounded-md"
+                      alt={`${track?.songTitle} album cover`}
+                    />
                   )}
                   <div className="flex flex-col flex-1 text-left pl-2">
                     <p className="">{track.songTitle}</p>

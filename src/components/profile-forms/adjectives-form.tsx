@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Combobox } from '@headlessui/react';
 import { LegacyRef, useEffect, useMemo, useState } from 'react';

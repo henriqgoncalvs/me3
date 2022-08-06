@@ -48,6 +48,7 @@ model User {
   UserSong      UserSong[]
   UserMovie     UserMovie[]
   UserAdjective UserAdjective[]
+  UserSkills    UserSkills[]
 }
 
 model VerificationToken {
@@ -90,4 +91,12 @@ model UserAdjective {
   userId String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserSkills {
+  id    String @id @default(cuid())
+  skill String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

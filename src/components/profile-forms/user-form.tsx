@@ -17,7 +17,6 @@ export const UserForm = ({
 }) => {
   const { mutate } = trpc.useMutation('user.edit-user');
   const { mutate: usernameMutate } = trpc.useMutation('user.username');
-  const { register } = useForm<EditUserInputSchema & { username?: string }>();
   const errorNotify = (field: string) =>
     toast.error(`Oops! There was an error on the ${field} field 😭`);
 
@@ -28,8 +27,7 @@ export const UserForm = ({
         <form onSubmit={(e: any) => e.preventDefault()}>
           {/* upload avatar with react-dropzone and S3 */}
 
-          <Input<{ username?: string }>
-            register={register}
+          <Input
             name="username"
             defaultValue={username || ''}
             label="username"
@@ -50,8 +48,7 @@ export const UserForm = ({
             placeholder="@"
           />
 
-          <Input<EditUserInputSchema>
-            register={register}
+          <Input
             name="name"
             defaultValue={name || ''}
             label="name"
@@ -69,8 +66,7 @@ export const UserForm = ({
             placeholder="name"
           />
 
-          <Input<EditUserInputSchema>
-            register={register}
+          <Input
             name="bio"
             type="textarea"
             defaultValue={bio || ''}

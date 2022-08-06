@@ -8,6 +8,7 @@ import { userSongsRoute } from './subroutes/user-songs.route';
 import { userMoviesRoute } from './subroutes/user-movies.route';
 import { tmdbRouter } from './subroutes/tmdb.route';
 import { userAdjectivesRoute } from './subroutes/user-adjectives.route';
+import { userSkillsRoute } from './subroutes/user-skills.route';
 
 export const appRouter = createRouter()
   .transformer(superjson)
@@ -16,7 +17,8 @@ export const appRouter = createRouter()
   .merge('tmdb.', tmdbRouter)
   .merge('user-songs.', userSongsRoute)
   .merge('user-movies.', userMoviesRoute)
-  .merge('user-adjectives.', userAdjectivesRoute);
+  .merge('user-adjectives.', userAdjectivesRoute)
+  .merge('user-skills.', userSkillsRoute);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

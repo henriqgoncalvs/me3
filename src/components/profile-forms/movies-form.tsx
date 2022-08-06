@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Combobox } from '@headlessui/react';
 import { LegacyRef, useEffect, useState } from 'react';
@@ -48,11 +50,12 @@ const MovieInput = ({ label, userMovie }: { label: string; userMovie?: UserMovie
             <div className="flex items-center justify-center w-12 mr-2 pt-1">
               <img
                 src={`${TMDB_IMAGE_BASE_URL}${selectedMovie?.posterPath}`}
+                alt={`${selectedMovie?.title} poster`}
                 className="rounded-md"
               />
             </div>
           ) : (
-            <div className="w-12 h-16 rounded-md mr-3 bg-slate-500 border-dotted border-2 border-dashed border-slate-200" />
+            <div className="w-12 h-16 rounded-md mr-3 bg-slate-500 border-2 border-dashed border-slate-200" />
           )}
           <Combobox.Input
             onChange={(event) => setQuery(event.target.value)}
@@ -73,6 +76,7 @@ const MovieInput = ({ label, userMovie }: { label: string; userMovie?: UserMovie
                     <img
                       src={`${TMDB_IMAGE_BASE_URL}${movie.posterPath}`}
                       className="w-auto h-12 rounded-md"
+                      alt={`${movie?.title} poster`}
                     />
                   ) : (
                     <div className="w-8 h-12 rounded-md bg-slate-300 flex items-center justify-center text-[0.5rem] text-slate-800 leading-tight">

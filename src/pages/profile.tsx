@@ -12,6 +12,7 @@ import { UserForm } from '../components/profile-forms/user-form';
 import { SongsForm } from '../components/profile-forms/songs-form';
 import { MoviesForm } from '../components/profile-forms/movies-form';
 import { AdjectivesForm } from '../components/profile-forms/adjectives-form';
+import { SkillsForm } from '../components/profile-forms/skills-form';
 
 const UsernameForm = ({ setUsername }: { setUsername: (username: string) => void }) => {
   const { mutate } = trpc.useMutation('user.username');
@@ -92,6 +93,7 @@ const ProfilePage: NextPage = () => {
                 setUsername={setUsername}
               />
               <AdjectivesForm />
+              <SkillsForm />
               <SongsForm />
               <MoviesForm />
             </div>
