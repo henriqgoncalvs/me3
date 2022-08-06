@@ -148,7 +148,7 @@ const ProfilePage: NextPage = () => {
 
       <div className="container mx-auto flex flex-col items-center justify-between min-h-screen px-4">
         <div className="w-full md:w-96 p-7 flex flex-col items-center justify-center bg-slate-800 rounded-bl-[3rem] rounded-br-[3rem]">
-          <h2 className="text-3xl heading">profile</h2>
+          <h2 className="text-3xl heading">@{username}</h2>
           <p className="my-5">{userData?.user?.email}</p>
           <div className="flex items-center">
             {username && (
