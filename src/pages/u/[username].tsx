@@ -124,9 +124,16 @@ const UserPage = ({ user }: { user: User }) => {
   return (
     <>
       <Head>
-        <title>Me3 - {user.username}</title>
-        <meta name="description" content="Me3" />
+        <title>me3 - {user.username}</title>
+        <meta name="description" content={`Check out ${user.username}'s profile on me3`} />
         <link rel="icon" href="/favicon.ico" />
+
+        <meta property="og:title" content="me3" />
+        <meta property="og:site_name" content="me3" />
+        <meta property="twitter:site" content="me3" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://me3.hnqg.io" />
+        <meta property="og:image" content="/favicon.ico" />
       </Head>
 
       <div className="container mx-auto flex flex-col items-center justify-between min-h-screen px-4">
