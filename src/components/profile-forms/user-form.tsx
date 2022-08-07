@@ -1,6 +1,4 @@
-import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { EditUserInputSchema } from '../../schema/user.schema';
 import { trpc } from '../../utils/trpc';
 import { Input } from '../input';
 
@@ -24,7 +22,6 @@ export const UserForm = ({
     <div className="flex flex-col items-start">
       <h3 className="mb-3">profile</h3>
       <div className="p-4 bg-slate-700 rounded-xl w-full">
-        <form onSubmit={(e: any) => e.preventDefault()}>
           {/* upload avatar with react-dropzone and S3 */}
 
           <Input
@@ -85,7 +82,6 @@ export const UserForm = ({
             placeholder="bio"
             maxLength={80}
           />
-        </form>
       </div>
     </div>
   );
