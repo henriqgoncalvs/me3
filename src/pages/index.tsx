@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <meta property="twitter:site" content="me3" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://me3.hnqg.io" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="/assets/open-graph-banner.png" />
       </Head>
 
       <div className="container mx-auto flex flex-col items-center justify-between min-h-screen px-4">

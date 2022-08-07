@@ -132,8 +132,8 @@ const UserPage = ({ user }: { user: User }) => {
         <meta property="og:site_name" content="me3" />
         <meta property="twitter:site" content="me3" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://me3.hnqg.io" />
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:url" content={`https://me3.hnqg.io/u/${user.username}`} />
+        <meta property="og:image" content="/assets/open-graph-banner.png" />
       </Head>
 
       <div className="container mx-auto flex flex-col items-center justify-between min-h-screen px-4">
