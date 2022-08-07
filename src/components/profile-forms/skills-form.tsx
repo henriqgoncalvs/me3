@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { toast } from 'react-toastify';
 import { UserSkill } from '../../schema/user-skill.schema';
@@ -8,24 +9,25 @@ import { InputSkeleton } from '../input-skeleton';
 const SkillInput = ({
   name,
   label,
-  userSkill,
+  userSkill: originalUserSkill,
 }: {
   name: string;
   label: string;
   userSkill?: UserSkill;
 }) => {
+  const [userSkill, setUserSkill] = useState<string | undefined>(originalUserSkill?.skill);
   const { mutate } = trpc.useMutation(['user-skills.add-skill']);
   const errorNotify = () => toast.error(`Oops! There was an error on the skill field 😭`);
 
   return (
     <Input
       name={name}
-      defaultValue={userSkill?.skill || ''}
+      defaultValue={userSkill || ''}
       label={label}
       onBlurCallback={({ value, errorHandler }) => {
-        if (value !== userSkill?.skill) {
+        if (value !== userSkill) {
           mutate(
-            { skill: value, id: userSkill?.id },
+            { skill: value, id: originalUserSkill?.id },
             {
               onError: (e) => {
                 errorNotify();
