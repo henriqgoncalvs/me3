@@ -1,6 +1,6 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
 import { signIn } from 'next-auth/react';
-import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai';
+import { AiFillGithub, AiFillGoogleCircle, AiFillFacebook } from 'react-icons/ai';
 
 import Head from 'next/head';
 import { Footer } from '../components/footer';
@@ -44,6 +44,9 @@ const Home: NextPage = () => {
             </button>
             <button onClick={() => signIn('google')} className="flex items-center">
               login with google <AiFillGoogleCircle style={{ marginLeft: '8px' }} />{' '}
+            </button>
+            <button onClick={() => signIn('facebook')} className="flex items-center">
+              login with facebook <AiFillFacebook style={{ marginLeft: '8px' }} />{' '}
             </button>
           </div>
         </main>
