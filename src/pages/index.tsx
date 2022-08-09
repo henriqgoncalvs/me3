@@ -1,5 +1,6 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
+import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai';
 
 import Head from 'next/head';
 import { Footer } from '../components/footer';
@@ -37,8 +38,13 @@ const Home: NextPage = () => {
             and show your friends <br /> who you are in 3 items. 😉
           </p>
 
-          <div className="mt-5 flex flex-col items-center">
-            <button onClick={() => signIn('github')}>login with github 🐈‍⬛</button>
+          <div className="mt-5 flex flex-col items-center gap-5">
+            <button onClick={() => signIn('github')} className="flex items-center">
+              login with github <AiFillGithub style={{ marginLeft: '8px' }} />{' '}
+            </button>
+            <button onClick={() => signIn('google')} className="flex items-center">
+              login with google <AiFillGoogleCircle style={{ marginLeft: '8px' }} />{' '}
+            </button>
           </div>
         </main>
 
@@ -62,9 +68,5 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     };
   }
 
-  return {
-    props: {
-      session,
-    },
-  };
+  return { props: {} };
 }

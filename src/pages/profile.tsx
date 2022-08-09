@@ -15,7 +15,7 @@ import { AdjectivesForm } from '../components/profile-forms/adjectives-form';
 import { SkillsForm } from '../components/profile-forms/skills-form';
 
 const UsernameForm = ({ setUsername }: { setUsername: (username: string) => void }) => {
-  const { mutate } = trpc.useMutation('user.username');
+  const { mutate, error: mutationError } = trpc.useMutation('user.username');
   const {
     register,
     handleSubmit,
@@ -41,11 +41,15 @@ const UsernameForm = ({ setUsername }: { setUsername: (username: string) => void
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input placeholder="username" {...register('username', { required: true })} />
+        {(errors.username || mutationError) && (
+          <p className="text-sm text-red-400 pb-5">
+            {mutationError?.message || 'Username is required'}
+          </p>
+        )}
 
         <input type="submit" />
 
         <br />
-        {errors.username && <span>Username is required</span>}
       </form>
     </>
   );
@@ -89,7 +93,7 @@ const ProfilePage: NextPage = () => {
               <UserForm
                 bio={userData?.user?.bio}
                 name={userData?.user?.name || undefined}
-                username={userData?.user?.username}
+                username={username || userData?.user?.username}
                 setUsername={setUsername}
               />
               <AdjectivesForm />
